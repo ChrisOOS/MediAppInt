@@ -1,0 +1,5 @@
+MSH|^~\{|LAB|PTH|LOMC|BEDBOARD|201204231751|RITMIRTH|ORU^O01|26490051|P|2.2
+PID|1||000003123331^^^BEDBOARD^^||BBTEST1^JOHN^^^^||19810801|M|||1 MAIN ST^^ROCHESTER^NY^14623^^^^||5854751000|5854751234||||123123123|||||||||||||
+PV1|1|I|MED1^101^1^^^|A||^^^^^^^|123^CRAIG BENSON^^^^^|||MED|||||||^^^^^^|||||||||||||||||||||||||||201205061300||||||||
+OBR|1||14-SSP15213|DMSKN^|||201404111000|||||||201404111000||08340^BRUNDAGE^BRIAN^||||||201404111000|||F
+OBX|1|TX|DMSKN||FINAL DIAGNOSIS:~Skin, right forehead, biopsy:~ - Actinic keratosis.~ ~ ~ ~ ~INDICATIONS FOR PROCEDURE/CLINICAL HISTORY:~Lentigo, actinic keratosis, CA~ ~GROSS DESCRIPTION:~Received in formalin labeled "Something" and "right forehead" is a~0.3 x 0.2 cm tan-white skin shave. Entirely submitted in 1 yellow~cassette labeled 14s15213 A1.~ ~Summary of sections: A1 - 1 piece.~ ~ ~ ~ ~Date:        Reviewing Pathologist's Electronic Signature:~                        DR WHO, M.D.~The above electronic signature indicates that all work on this case was~supervised and evaluated by the Pathologist.  The diagnosis was~rendered by the reviewing Pathologist.||||||F
