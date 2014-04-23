@@ -24,6 +24,8 @@ public class DBLoader {
     private PreparedStatement prepStmt;
     private String msgStr;
     public int next_seq = 0;
+    public int patientId = 0;
+    
 
     public DBLoader()
             throws ClassNotFoundException, SQLException {
@@ -150,6 +152,13 @@ public class DBLoader {
 
             prepStmt.execute();
 
+            prepStmt = connection.prepareStatement("select max(pid) from patient");
+            ResultSet rs = prepStmt.executeQuery();
+            while (rs.next()){
+                patientId = rs.getInt(1);
+                System.out.println("MAX PID: " + patientId);
+            }
+            
             prepStmt.close();
         } catch (SQLException se) {
             System.out.println("Error in DBLoader.set_Patient: " + se);
@@ -171,8 +180,8 @@ public class DBLoader {
             PreparedStatement prepStmt = connection.prepareStatement(
                     "insert into visit (patient_class, admission_type, location, prior_location, "
                             + "attending_provider_number, attending_provider_name, hospital_service, visit_number, admit_date,"
-                            + "discharge_date) "
-                            + "values (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)");
+                            + "discharge_date, patient_pid) "
+                            + "values (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, " + patientId + ")");
 
             prepStmt.setString(1, mp.visit.getPatient_class());
             prepStmt.setString(2, mp.visit.getAdmission_type());
@@ -189,6 +198,7 @@ public class DBLoader {
             prepStmt.execute();
 
             prepStmt.close();
+            patientId = 0;
         } catch (SQLException se) {
             System.out.println("Error in DBLoader.set_Visit: " + se);
         }
