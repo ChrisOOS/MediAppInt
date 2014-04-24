@@ -68,6 +68,10 @@ public class Main {
                 mp = new MsgParse(myStructure);  // Instantiate a Message Parse Object
                 mp.parse_Segments();
 
+                // -------------------------------------------------------
+                // Dump out MSH contents
+                //--------------------------------------------------------
+                System.out.println("The Sending App is: " + mp.message.getSendingApp());
 
                 //---------------------------------------------------------
                 // Dump the contents of the Patient object
@@ -106,6 +110,7 @@ public class Main {
                 System.out.println("Admit Date: " + mp.visit.getAdmit_date());
                 System.out.println("Discharge Date: " + mp.visit.getDischarge_date());
 
+                
 
 
                 //Load Patient Object into Database

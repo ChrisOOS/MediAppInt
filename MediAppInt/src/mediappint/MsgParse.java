@@ -14,13 +14,15 @@ public class MsgParse {
     private HL7Structure myStructure;
     
     protected Visit visit;
+    protected Message message;
 
     MsgParse(HL7Structure myStructureInput) {
         patient = new Patient();
         visit = new Visit();
+        message = new Message();
         myStructure = myStructureInput;
     }
-
+    
     /****************************************************/
     /**
      * Method parse_PID<br>
@@ -32,6 +34,56 @@ public class MsgParse {
      */
     public void parse_Segments() {
 
+/* 
+ * Parse MSH for MESSAGE Information
+ */
+        
+    String SendingApp = ""; // MSH 3
+    String SendingFacility = ""; // MSH 4
+    String ReceivingApp = ""; // MSH 5
+    String ReceivingFacility = ""; // MSH 6
+    String MsgDateTime = ""; // MSH 7
+    String Security = ""; // MSH 8
+    String MsgType = ""; // MSH 9
+    String MsgCtrl = ""; // MSH 10
+    String ProcessingId = ""; // MSH 11
+    String VersionId = ""; // MSH 12
+        
+    
+    SendingApp = myStructure.helper().get("MSH-3").getData();
+    message.setSendingApp(SendingApp);
+
+    SendingFacility = myStructure.helper().get("MSH-4").getData();
+    message.setSendingFacility(SendingFacility);
+    
+    ReceivingApp = myStructure.helper().get("MSH-5").getData();
+    message.setReceivingApp(ReceivingApp);
+    
+    ReceivingFacility = myStructure.helper().get("MSH-6").getData();
+    message.setReceivingFacility(ReceivingFacility);
+    
+    MsgDateTime = myStructure.helper().get("MSH-7").getData();
+    message.setMsgDateTime(MsgDateTime);
+    
+    Security = myStructure.helper().get("MSH-8").getData();
+    message.setSecurity(Security);
+    
+    MsgType = myStructure.helper().get("MSH-9").getData();
+    message.setMsgType(MsgType);
+    
+    MsgCtrl = myStructure.helper().get("MSH-10").getData();
+    message.setMsgCtrl(MsgCtrl);    
+
+    ProcessingId = myStructure.helper().get("MSH-11").getData();
+    message.setProcessingId(ProcessingId);
+    
+    VersionId = myStructure.helper().get("MSH-12").getData();
+    message.setVersionId(VersionId);
+
+    
+    
+    
+    
     String BirthDt = "";  		// PID 7
     String SexCd = "";    		// PID 8
     String Race = "";			// PID 10
