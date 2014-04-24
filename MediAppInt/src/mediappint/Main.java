@@ -72,7 +72,17 @@ public class Main {
                 // Dump out MSH contents
                 //--------------------------------------------------------
                 System.out.println("The Sending App is: " + mp.message.getSendingApp());
-
+                System.out.println("The SendingFacility: " + mp.message.getSendingFacility());
+                System.out.println("The ReceivingApp: " + mp.message.getReceivingApp());
+                System.out.println("The ReceivingFacility; " + mp.message.getReceivingFacility());
+                System.out.println("The MsgDateTime; " + mp.message.getMsgDateTime());
+                System.out.println("The Security; " + mp.message.getSecurity());
+                System.out.println("The MsgType; " + mp.message.getMsgType());
+                System.out.println("The MsgSubType; " + mp.message.getMsgSubType());
+                System.out.println("The MsgCtrl; " + mp.message.getMsgCtrl());
+                System.out.println("The ProcessingId; " + mp.message.getProcessingId());
+                System.out.println("The VersionId; " + mp.message.getVersionId());
+                
                 //---------------------------------------------------------
                 // Dump the contents of the Patient object
                 //---------------------------------------------------------

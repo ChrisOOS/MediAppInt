@@ -19,6 +19,7 @@ public class Message {
     private String MsgDateTime;
     private String Security;
     private String MsgType;
+    private String MsgSubType;
     private String MsgCtrl;
     private String ProcessingId;
     private String VersionId;
@@ -80,7 +81,14 @@ public class Message {
     public void setMsgType(String MsgType) {
         this.MsgType = MsgType;
     }
+    
+    public String getMsgSubType() {
+        return MsgSubType;
+    }
 
+    public void setMsgSubType(String MsgSubType) {
+        this.MsgSubType = MsgSubType;
+    }
     public String getMsgCtrl() {
         return MsgCtrl;
     }

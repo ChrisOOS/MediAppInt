@@ -44,7 +44,8 @@ public class MsgParse {
     String ReceivingFacility = ""; // MSH 6
     String MsgDateTime = ""; // MSH 7
     String Security = ""; // MSH 8
-    String MsgType = ""; // MSH 9
+    String MsgType = ""; // MSH 9.1
+    String MsgSubType = ""; // MSH 9.2
     String MsgCtrl = ""; // MSH 10
     String ProcessingId = ""; // MSH 11
     String VersionId = ""; // MSH 12
@@ -68,8 +69,11 @@ public class MsgParse {
     Security = myStructure.helper().get("MSH-8").getData();
     message.setSecurity(Security);
     
-    MsgType = myStructure.helper().get("MSH-9").getData();
+    MsgType = myStructure.helper().get("MSH-9.1").getData();
     message.setMsgType(MsgType);
+    
+    MsgSubType = myStructure.helper().get("MSH-9.2").getData();
+    message.setMsgSubType(MsgSubType);
     
     MsgCtrl = myStructure.helper().get("MSH-10").getData();
     message.setMsgCtrl(MsgCtrl);    
