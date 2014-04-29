@@ -14,11 +14,13 @@ public class MsgParse {
     private HL7Structure myStructure;
     
     protected Visit visit;
+    protected LabOrder labOrder;
     protected Message message;
 
     MsgParse(HL7Structure myStructureInput) {
         patient = new Patient();
         visit = new Visit();
+        labOrder = new LabOrder();
         message = new Message();
         myStructure = myStructureInput;
     }
@@ -233,5 +235,31 @@ public class MsgParse {
    dischargeDate = myStructure.helper().get("PV1-45").getData();
    visit.setDischarge_date(dischargeDate);
    
-    } // End Method parse_Segments
+   /* 
+ * Parse ORC for LabOrder Information
+ */        
+   String placerNum;
+   String labOrderControl;
+   String fillerOrderNum;
+   String dateTransaction;
+   String serviceIdentifier;
+   
+   placerNum = myStructure.helper().get("ORC-2").getData();
+   labOrder.setPlacerNum(placerNum);
+   
+   labOrderControl = myStructure.helper().get("ORC-1").getData();
+   labOrder.setLabOrderControl(labOrderControl);
+   
+   fillerOrderNum = myStructure.helper().get("ORC-3").getData();
+   labOrder.setFillerOrderNum(fillerOrderNum);
+   
+   dateTransaction = myStructure.helper().get("ORC-9").getData();
+   labOrder.setDateTransaction(dateTransaction);
+    
+   serviceIdentifier = myStructure.helper().get("ORC-2").getData();
+   labOrder.setServiceIdentifier(serviceIdentifier);
+   
+   } // End Method parse_Segments
+    
+    
 }  // End of MsgParse Class
