@@ -139,7 +139,13 @@ public class Main {
                     //Load Visit Object into Database
                     dbloader.set_Visit(mp);
                 }
-
+                else if (mp.event.getEventTypeCode().equals("A02")) {
+                    //get the current location from the visit table for patient
+                    //update table -- prior location gets value of current location
+                    //update table -- current location gets value from the A02 message
+                }
+                else if (mp.event.getEventTypeCode().equals("A03")) {
+                }
 
                 //set the message as processed
                 dbloader.set_processed(iqseq);
