@@ -84,6 +84,17 @@ public class Main {
                 System.out.println("The VersionId; " + mp.message.getVersionId());
                 
                 //---------------------------------------------------------
+                // Dump the contents of the EVENT object
+                //---------------------------------------------------------
+
+                System.out.println("EventTypeCode: " + mp.event.getEventTypeCode());
+                System.out.println("RecDateTime: " + mp.event.getRecDateTime());
+                System.out.println("DateTimePlanned: " + mp.event.getDateTimePlanned());
+                System.out.println("EventReason: " + mp.event.getEventReason());
+                System.out.println("OperatorID: " + mp.event.getOperatorID());
+                System.out.println("EventOccurred: " + mp.event.getEventOccurred());
+                
+                //---------------------------------------------------------
                 // Dump the contents of the Patient object
                 //---------------------------------------------------------
 
