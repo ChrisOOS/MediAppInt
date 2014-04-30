@@ -210,6 +210,39 @@ public class DBLoader {
     }
 
 //--------------------------------------------------------------------
+    
+//--------------------------------------------------------------------
+    /**
+     * set_LabOrder<br>
+     * This method will call a preparedStatement which writes to the vLabOrder table
+     * @param MsgParse mp
+     * @throws SQLException
+     */
+    public void set_LabOrder(MsgParse mp)
+            throws SQLException {
+        try {
+                
+                PreparedStatement prepStmt = connection.prepareStatement(
+                        "insert into LabOrder (placerNum, labOrderControl, fillerOrderNum, dateTransaction, "
+                                + "serviceIdentifier, visit_patient_pid) "
+                                + "values (?, ?, ?, ?, ?, " + patientId + ")");
+                
+                prepStmt.setString(1, mp.labOrder.getPlacerNum());
+                prepStmt.setString(2, mp.labOrder.getLabOrderControl());
+                prepStmt.setString(3, mp.labOrder.getFillerOrderNum());
+                prepStmt.setString(4, mp.labOrder.getDateTransaction());
+                prepStmt.setString(5, mp.labOrder.getServiceIdentifier());             
+                
+                prepStmt.execute();
+                
+                prepStmt.close();
+                patientId = 0;
+            } catch (SQLException se) {
+                System.out.println("Error in DBLoader.set_LabOrder: " + se);
+            }
+        }
+
+//--------------------------------------------------------------------
 
 //--------------------------------------------------------------------
     /**

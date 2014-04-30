@@ -58,6 +58,10 @@ public class LabOrder {
     public void setServiceIdentifier(String serviceIdentifier) {
         this.serviceIdentifier = serviceIdentifier;
     }
+
+    Object getLabOrder_class() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
     
     
 }
