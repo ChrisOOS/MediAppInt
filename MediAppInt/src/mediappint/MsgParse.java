@@ -15,6 +15,7 @@ public class MsgParse {
     private HL7Structure myStructure;
     
     protected Visit visit;
+    protected LabResult labResult;
     protected LabOrder labOrder;
     protected Message message;
     protected Event event;
@@ -23,6 +24,7 @@ public class MsgParse {
         patient = new Patient();
         visit = new Visit();
         labOrder = new LabOrder();
+        labResult = new LabResult();
         message = new Message();
         event = new Event();
         myStructure = myStructureInput;
@@ -286,7 +288,60 @@ public class MsgParse {
    dateTransaction = myStructure.helper().get("ORC-9").getData();
    labOrder.setDateTransaction(dateTransaction);
     
+   /* 
+ * Parse OBR & OBX for LabResult Information
    
+    private String placerNum = "";
+    private String fillerOrderNum = "";
+    private String universalServiceIdentifier = "";
+    private String dateTransaction = "";
+    private String labStatus = "";
+    private String labResults = "";
+    private String valueType = "";
+    private String observationValue = "";
+    private String observationIdentifier= "";
+    private String observationResultStatus= "";
+ */   
+    String placerNumResult;
+    String fillerOrderNumResult;
+    String universalServiceIdentifier;
+    String dateTransactionResult;
+    String labStatus;
+    String labOrderingPhysician;
+    String valueType;
+    String observationValue;
+    String observationIdentifier;
+    String observationResultStatus;
+    
+    placerNumResult = myStructure.helper().get("OBR-2").getData();
+    labResult.setPlacerNum(placerNumResult);
+    
+    fillerOrderNumResult = myStructure.helper().get("OBR-3").getData();
+    labResult.setFillerOrderNum(fillerOrderNumResult);
+    
+    universalServiceIdentifier = myStructure.helper().get("OBR-4").getData();
+    labResult.setUniversalServiceIdentifier(universalServiceIdentifier);
+    
+    dateTransactionResult = myStructure.helper().get("OBR-7").getData();
+    labResult.setDateTransaction(dateTransactionResult);
+    
+    labStatus = myStructure.helper().get("OBR-25").getData();
+    labResult.setLabStatus(labStatus);
+    
+    labOrderingPhysician = myStructure.helper().get("OBR-25").getData();
+    labResult.setLabOrderingPhysician(labOrderingPhysician);
+    
+    valueType = myStructure.helper().get("OBX-2").getData();
+    labResult.setValueType(valueType);
+    
+    observationValue = myStructure.helper().get("OBX-5").getData();
+    labResult.setObservationValue(observationValue);
+    
+    observationIdentifier = myStructure.helper().get("OBX-3").getData();
+    labResult.setObservationIdentifier(observationIdentifier);
+    
+    observationResultStatus = myStructure.helper().get("OBX-11").getData();
+    labResult.setObservationResultStatus(observationResultStatus);
    } // End Method parse_Segments
     
     

@@ -21,8 +21,17 @@ public class LabResult {
     private String observationValue = "";
     private String observationIdentifier= "";
     private String observationResultStatus= "";
+    private String labOrderingPhysician= "";
     
     LabResult(){}
+
+    public String getLabOrderingPhysician() {
+        return labOrderingPhysician;
+    }
+
+    public void setLabOrderingPhysician(String labOrderingPhysician) {
+        this.labOrderingPhysician = labOrderingPhysician;
+    }
 
     public String getPlacerNum() {
         return placerNum;

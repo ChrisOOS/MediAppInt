@@ -22,7 +22,7 @@ public class LabOrder {
     public String getPlacerNum() {
         return placerNum;
     }
-
+        
     public void setPlacerNum(String placerNum) {
         this.placerNum = placerNum;
     }
