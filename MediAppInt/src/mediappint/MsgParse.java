@@ -259,8 +259,8 @@ public class MsgParse {
    hospitalService = myStructure.helper().get("PV1-10").getData();
    visit.setHospital_service(hospitalService);
    
-   visitNumber = myStructure.helper().get("PV1-19").getData();
-   visit.setVisit_number(visitNumber);
+//   visitNumber = myStructure.helper().get("PV1-19").getData();
+//   visit.setVisit_number(visitNumber);
    
    admitDate = myStructure.helper().get("PV1-44").getData();
    visit.setAdmit_date(admitDate);

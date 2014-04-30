@@ -22,7 +22,7 @@ public class Visit {
    private String attending_provider_number;
    private String attending_provider_name;
    private String hospital_service;
-   private String visit_number;
+   //private String visit_number;
    private String admit_date;
    private String discharge_date;
 
@@ -84,13 +84,13 @@ public class Visit {
         this.hospital_service = hospital_service;
     }
 
-    public String getVisit_number() {
-        return visit_number;
-    }
-
-    public void setVisit_number(String visit_number) {
-        this.visit_number = visit_number;
-    }
+//    public String getVisit_number() {
+//        return visit_number;
+//    }
+//
+//    public void setVisit_number(String visit_number) {
+//        this.visit_number = visit_number;
+//    }
 
     public String getAdmit_date() {
         return admit_date;

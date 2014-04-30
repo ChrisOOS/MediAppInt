@@ -127,17 +127,19 @@ public class Main {
                 System.out.println("Attending Provider Number: " + mp.visit.getAttending_provider_number());
                 System.out.println("Attending Provider Name: " + mp.visit.getAttending_provider_name());
                 System.out.println("Hospital Service: " + mp.visit.getHospital_service());
-                System.out.println("Visit Number: " + mp.visit.getVisit_number());
+//                System.out.println("Visit Number: " + mp.visit.getVisit_number());
                 System.out.println("Admit Date: " + mp.visit.getAdmit_date());
                 System.out.println("Discharge Date: " + mp.visit.getDischarge_date());
 
                 
 
+                if (mp.event.getEventTypeCode().equals("A01")){
+                    //Load Patient Object into Database
+                    dbloader.set_Patient(mp);
+                    //Load Visit Object into Database
+                    dbloader.set_Visit(mp);
+                }
 
-                //Load Patient Object into Database
-                dbloader.set_Patient(mp);
-                //Load Visit Object into Database
-                dbloader.set_Visit(mp);
 
                 //set the message as processed
                 dbloader.set_processed(iqseq);

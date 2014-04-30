@@ -152,6 +152,7 @@ public class DBLoader {
 
             prepStmt.execute();
 
+            //Get max PID that we just inserted so we can use it as FK in Visit Insert
             prepStmt = connection.prepareStatement("select max(pid) from patient");
             ResultSet rs = prepStmt.executeQuery();
             while (rs.next()){
@@ -179,9 +180,11 @@ public class DBLoader {
 
             PreparedStatement prepStmt = connection.prepareStatement(
                     "insert into visit (patient_class, admission_type, location, prior_location, "
-                            + "attending_provider_number, attending_provider_name, hospital_service, visit_number, admit_date,"
-                            + "discharge_date, patient_pid) "
-                            + "values (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, " + patientId + ")");
+                           // + "attending_provider_number, attending_provider_name, hospital_service, visit_number, admit_date,"
+                              + "attending_provider_number, attending_provider_name, hospital_service, admit_date,"
+                              + "discharge_date, patient_pid) "
+                           // + "values (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, " + patientId + ")");
+                              + "values (?, ?, ?, ?, ?, ?, ?, ?, ?, " + patientId + ")");
 
             prepStmt.setString(1, mp.visit.getPatient_class());
             prepStmt.setString(2, mp.visit.getAdmission_type());
@@ -190,9 +193,11 @@ public class DBLoader {
             prepStmt.setString(5, mp.visit.getAttending_provider_number());
             prepStmt.setString(6, mp.visit.getAttending_provider_name());
             prepStmt.setString(7, mp.visit.getHospital_service());
-            prepStmt.setString(8, mp.visit.getVisit_number());
-            prepStmt.setString(9, mp.visit.getAdmit_date());
-            prepStmt.setString(10, mp.visit.getDischarge_date());
+//            prepStmt.setString(8, mp.visit.getVisit_number());
+//            prepStmt.setString(9, mp.visit.getAdmit_date());
+//            prepStmt.setString(10, mp.visit.getDischarge_date());
+            prepStmt.setString(8, mp.visit.getAdmit_date());
+            prepStmt.setString(9, mp.visit.getDischarge_date());
     
 
             prepStmt.execute();
