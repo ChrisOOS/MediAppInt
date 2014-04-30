@@ -242,7 +242,6 @@ public class MsgParse {
    String labOrderControl;
    String fillerOrderNum;
    String dateTransaction;
-   String serviceIdentifier;
    
    placerNum = myStructure.helper().get("ORC-2").getData();
    labOrder.setPlacerNum(placerNum);
@@ -256,8 +255,6 @@ public class MsgParse {
    dateTransaction = myStructure.helper().get("ORC-9").getData();
    labOrder.setDateTransaction(dateTransaction);
     
-   serviceIdentifier = myStructure.helper().get("ORC-2").getData();
-   labOrder.setServiceIdentifier(serviceIdentifier);
    
    } // End Method parse_Segments
     
