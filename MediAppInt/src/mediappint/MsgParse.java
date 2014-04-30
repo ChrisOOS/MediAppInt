@@ -7,6 +7,7 @@ import org.urhl7.igor.*;
 
 /**
  *@author Marco Casale<br>Medical Informatics<br>University of Rochester
+ *
  */
 public class MsgParse {
 
@@ -16,12 +17,14 @@ public class MsgParse {
     protected Visit visit;
     protected LabOrder labOrder;
     protected Message message;
+    protected Event event;
 
     MsgParse(HL7Structure myStructureInput) {
         patient = new Patient();
         visit = new Visit();
         labOrder = new LabOrder();
         message = new Message();
+        event = new Event();
         myStructure = myStructureInput;
     }
     
@@ -86,10 +89,38 @@ public class MsgParse {
     VersionId = myStructure.helper().get("MSH-12").getData();
     message.setVersionId(VersionId);
 
+/* 
+ * Parse EVN for EVENT Information
+ */   
+    String EventTypeCode = ""; // PID 1
+    String RecDateTime = ""; //PID 2
+    String DateTimePlanned = ""; //PID 3
+    String EventReason = ""; //PID 4
+    String OperatorID = ""; //PID 5
+    String EventOccurred = ""; //PID 6
+    
+    EventTypeCode = myStructure.helper().get("EVN-1").getData();
+    event.setEventTypeCode(EventTypeCode);
+    
+    RecDateTime = myStructure.helper().get("EVN-2").getData();
+    event.setRecDateTime(RecDateTime);
+    
+    DateTimePlanned = myStructure.helper().get("EVN-3").getData();
+    event.setDateTimePlanned(DateTimePlanned);    
+
+    EventReason = myStructure.helper().get("EVN-4").getData();
+    event.setEventReason(EventReason);  
+    
+    OperatorID = myStructure.helper().get("EVN-5").getData();
+    event.setOperatorID(OperatorID);
+    
+    EventOccurred = myStructure.helper().get("EVN-6").getData();
+    event.setEventOccurred(EventOccurred);
     
     
-    
-    
+/* 
+ * Parse PID for PATIENT Information
+ */    
     String BirthDt = "";  		// PID 7
     String SexCd = "";    		// PID 8
     String Race = "";			// PID 10
@@ -235,7 +266,7 @@ public class MsgParse {
    dischargeDate = myStructure.helper().get("PV1-45").getData();
    visit.setDischarge_date(dischargeDate);
    
-   /* 
+ /* 
  * Parse ORC for LabOrder Information
  */        
    String placerNum;
