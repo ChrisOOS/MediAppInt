@@ -90,6 +90,8 @@ public class MsgParse {
     
     VersionId = myStructure.helper().get("MSH-12").getData();
     message.setVersionId(VersionId);
+            
+    
 
 /* 
  * Parse EVN for EVENT Information
@@ -224,10 +226,10 @@ public class MsgParse {
 /* 
  * Parse PV1 for Visit Information
  */        
-   String patientClass;
-   String admissionType;
-   String location;
-   String priorLocation;
+   String patientClass; //PV1-2
+   String admissionType; // PV1-4
+   String location; // PV1-3
+   String priorLocation; // PV1-6
    String attendingProviderNumber;
    String attendingProviderName;
    String hospitalService;

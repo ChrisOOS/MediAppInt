@@ -210,6 +210,36 @@ public class DBLoader {
     }
 
 //--------------------------------------------------------------------
+//--------------------------------------------------------------------
+/**
+ * update_Visit<br>
+ * This method will call a preparedStatement which fetches and then updates
+ * from visit table
+ * @param MsgParse mp
+ * @throws SQLException
+ */
+       public void update_Visit(MsgParse mp)
+            throws SQLException {
+        if (!mp.visit.getPatient_class().isEmpty())
+        try {
+            System.out.println("we want to do an update here, but we're waiting on email answer");
+            PreparedStatement prepStmt = connection.prepareStatement(
+                    "update visit "
+                            + "set prior_location = ?, location = ? "
+                            + "where location = ? "
+                            + "AND admit_date = ?");
+            
+            prepStmt.setString(1, mp.visit.getPrior_location());
+            prepStmt.setString(2, mp.visit.getLocation());
+            prepStmt.setString(3, mp.visit.getPrior_location());
+            prepStmt.setString(4, mp.visit.getAdmit_date());
+//            prepStmt.executeUpdate();
+//
+//            prepStmt.close();
+        } catch (SQLException se) {
+            System.out.println("Error in DBLoader.set_Visit: " + se);
+        }
+    }
     
 //--------------------------------------------------------------------
     /**
