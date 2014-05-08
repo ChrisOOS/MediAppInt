@@ -18,9 +18,13 @@ where patient_pid = (select pid from patient where mrn = '000003123331');
 update visit set prior_location = 'MED1^101^1^^^^^', location = 'MED1^101^2^^^' where location = 'MED1^101^1^^^^^';
 
 
+
 select * from patient;
 select * from visit;
 select * from hl7_q;
+select * from lab_orders;
+
+
 
 
 

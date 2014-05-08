@@ -184,7 +184,8 @@ public class DBLoader {
                               + "attending_provider_number, attending_provider_name, hospital_service, admit_date,"
                               + "discharge_date, patient_pid) "
                            // + "values (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, " + patientId + ")");
-                              + "values (?, ?, ?, ?, ?, ?, ?, ?, ?, " + patientId + ")");
+                            // This pid comes from SET_PATIENT where we select MAX(PID)  
+                            + "values (?, ?, ?, ?, ?, ?, ?, ?, ?, " + patientId + ")");
 
             prepStmt.setString(1, mp.visit.getPatient_class());
             prepStmt.setString(2, mp.visit.getAdmission_type());
@@ -223,7 +224,9 @@ public class DBLoader {
             throws SQLException {
         if (!mp.visit.getPatient_class().isEmpty())
         try {
-
+        //get the current location from the visit table for patient                     
+        //update table -- prior location gets value of current location
+        //update table -- current location gets value from the A02 message
             PreparedStatement prepStmt = connection.prepareStatement(
                     "update visit "
                             + "set prior_location = ?, location = ? "
@@ -349,25 +352,50 @@ public class DBLoader {
         try {
                 
                 PreparedStatement prepStmt = connection.prepareStatement(
-                        "insert into LabOrder (placerNum, labOrderControl, fillerOrderNum, dateTransaction, "
+                        "insert into Lab_orders (placerNum, labOrderControl, fillerOrderNum, dateTransaction, "
                                 + "serviceIdentifier, visit_patient_pid) "
-                                + "values (?, ?, ?, ?, ?, " + patientId + ")");
+                                + "values (?, ?, ?, ?, ?, " 
+                                + "(select pid from patient where mrn = ?))");
                 
                 prepStmt.setString(1, mp.labOrder.getPlacerNum());
                 prepStmt.setString(2, mp.labOrder.getLabOrderControl());
                 prepStmt.setString(3, mp.labOrder.getFillerOrderNum());
                 prepStmt.setString(4, mp.labOrder.getDateTransaction());
-                prepStmt.setString(5, mp.labOrder.getServiceIdentifier());             
+                prepStmt.setString(5, mp.labOrder.getServiceIdentifier()); 
+                prepStmt.setString(6, mp.patient.getMRN());
                 
                 prepStmt.execute();
                 
                 prepStmt.close();
-                patientId = 0;
             } catch (SQLException se) {
                 System.out.println("Error in DBLoader.set_LabOrder: " + se);
             }
         }
-
+    
+//--------------------------------------------------------------------
+    /**
+     * cancel_laborder<br>
+     * This method will call a preparedStatement which writes to the vLabOrder table
+     * @param MsgParse mp
+     * @throws SQLException
+     */
+    public void cancel_LabOrder(MsgParse mp)
+            throws SQLException {
+        try {
+                
+                PreparedStatement prepStmt = connection.prepareStatement(
+                        "delete from laborder where placerNum = ?");
+                
+                prepStmt.setString(1, mp.labOrder.getPlacerNum());
+                prepStmt.execute();
+                
+                prepStmt.close();
+            } catch (SQLException se) {
+                System.out.println("Error in DBLoader.set_LabOrder: " + se);
+            }
+        }
+    
+    
 //--------------------------------------------------------------------
 
 //--------------------------------------------------------------------
