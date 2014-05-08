@@ -243,10 +243,16 @@ public class MsgParse {
    admissionType = myStructure.helper().get("PV1-4").getData();
    visit.setAdmission_type(admissionType);
    
-   location = myStructure.helper().get("PV1-3").getData();
+   //location = myStructure.helper().get("PV1-3").getData();
+   //Piece together the location before storing
+   location =  myStructure.helper().get("PV1-3.1").getData() + "-" +
+           myStructure.helper().get("PV1-3.2").getData() + "-" +
+           myStructure.helper().get("PV1-3.3").getData();
    visit.setLocation(location);
    
-   priorLocation = myStructure.helper().get("PV1-6").getData();
+   priorLocation = myStructure.helper().get("PV1-6.1").getData() + "-" +
+           myStructure.helper().get("PV1-6.2").getData() + "-" +
+           myStructure.helper().get("PV1-6.3").getData();
    visit.setPrior_location(priorLocation);
    
    attendingProviderNumber = myStructure.helper().get("PV1-7.1").getData();

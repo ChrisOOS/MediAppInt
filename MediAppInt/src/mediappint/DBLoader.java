@@ -222,7 +222,7 @@ public class DBLoader {
             throws SQLException {
         if (!mp.visit.getPatient_class().isEmpty())
         try {
-            System.out.println("we want to do an update here, but we're waiting on email answer");
+//            System.out.println("we want to do an update here, but we're waiting on email answer");
             PreparedStatement prepStmt = connection.prepareStatement(
                     "update visit "
                             + "set prior_location = ?, location = ? "
@@ -233,9 +233,9 @@ public class DBLoader {
             prepStmt.setString(2, mp.visit.getLocation());
             prepStmt.setString(3, mp.visit.getPrior_location());
             prepStmt.setString(4, mp.visit.getAdmit_date());
-//            prepStmt.executeUpdate();
-//
-//            prepStmt.close();
+            prepStmt.executeUpdate();
+
+            prepStmt.close();
         } catch (SQLException se) {
             System.out.println("Error in DBLoader.set_Visit: " + se);
         }

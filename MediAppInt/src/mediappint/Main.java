@@ -146,11 +146,24 @@ public class Main {
                     //update table -- prior location gets value of current location
                     //update table -- current location gets value from the A02 message
                     //
+                    
+                    // TODO
+                    // IGoing to parse the location similar to how we parsed the attending provide
+                    // pull out the sub-components and piece them together
+                    // then we can compare the values...
                     dbloader.update_Visit(mp);
                     
 
                 }
                 else if (mp.event.getEventTypeCode().equals("A03")) {
+                    // CHRIS
+                    // new method for dbloader.discharge(mp)
+                    // use the mrn in the A03 to identify the patient (we want the pid)
+                    // use patient.pid as visit.patient_pid
+                    //    where visit.patient_pid = patient.pid
+                    //    -- update the location fields to be null
+                    //    -- update admission_type to be 'D'
+                    //    -- set discharge date to now()
                     
                 }
 
