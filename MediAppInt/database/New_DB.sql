@@ -93,7 +93,6 @@ ENGINE = InnoDB;
 -- -----------------------------------------------------
 CREATE  TABLE IF NOT EXISTS `mirthdb`.`Lab_Orders` (
   `labOrderNum` INT(11) NOT NULL AUTO_INCREMENT,
-  `pid` INT(11) NOT NULL ,
   `placerNum` VARCHAR(45) NULL ,
   `visit_vid` INT(11) NOT NULL ,
   `visit_patient_pid` INT(11) NOT NULL ,
