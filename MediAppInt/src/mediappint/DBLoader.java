@@ -357,9 +357,12 @@ public class DBLoader {
                                 + "values (?, ?, ?, ?, ?, " 
                                 + "(select pid from patient where mrn = ?))");
                 
+                // TODO - In order to put the visit_vid (current error) in the table, 
+                // We're going to have to get "all the pids" first
+                
                 prepStmt.setString(1, mp.labOrder.getPlacerNum());
                 prepStmt.setString(2, mp.labOrder.getLabOrderControl());
-                prepStmt.setString(3, mp.labOrder.getFillerOrderNum());
+                prepStmt.setString(3, "fakefiller");
                 prepStmt.setString(4, mp.labOrder.getDateTransaction());
                 prepStmt.setString(5, mp.labOrder.getServiceIdentifier()); 
                 prepStmt.setString(6, mp.patient.getMRN());

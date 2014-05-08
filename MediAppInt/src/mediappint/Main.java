@@ -160,8 +160,14 @@ public class Main {
                     if (mp.labOrder.getLabOrderControl().equals("NW")){
                         dbloader.set_LabOrder(mp);
                     }
+                    if (mp.labOrder.getLabOrderControl().equals("CA")){
+                        dbloader.cancel_LabOrder(mp);
+                    }
                     
-                }
+                }// if lab order
+                
+                
+                
                 //set the message as processed
                 dbloader.set_processed(iqseq);
                 //get sequence number of next unprocessed message
