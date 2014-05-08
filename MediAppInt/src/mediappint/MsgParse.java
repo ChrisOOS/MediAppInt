@@ -248,11 +248,13 @@ public class MsgParse {
    location =  myStructure.helper().get("PV1-3.1").getData() + "-" +
            myStructure.helper().get("PV1-3.2").getData() + "-" +
            myStructure.helper().get("PV1-3.3").getData();
+   if (location.equals("--")) location = "";
    visit.setLocation(location);
    
    priorLocation = myStructure.helper().get("PV1-6.1").getData() + "-" +
            myStructure.helper().get("PV1-6.2").getData() + "-" +
            myStructure.helper().get("PV1-6.3").getData();
+   if (priorLocation.equals("--")) priorLocation = "";
    visit.setPrior_location(priorLocation);
    
    attendingProviderNumber = myStructure.helper().get("PV1-7.1").getData();

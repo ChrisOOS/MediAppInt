@@ -151,13 +151,6 @@ public class Main {
                 }
                 else if (mp.event.getEventTypeCode().equals("A03")) {
                     // CHRIS
-                    // new method for dbloader.discharge(mp)
-                    // use the mrn in the A03 to identify the patient (we want the pid)
-                    // use patient.pid as visit.patient_pid
-                    //    where visit.patient_pid = patient.pid
-                    //    -- update the location fields to be null
-                    //    -- update admission_type to be 'D'
-                    //    -- set discharge date to now()
                     dbloader.doA03(mp);
                     
                 }

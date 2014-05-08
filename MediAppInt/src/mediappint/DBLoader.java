@@ -251,9 +251,34 @@ public class DBLoader {
  * @param MsgParse mp
  * @throws SQLException
  */      
-    public void doA03(MsgParse mp){
-        System.out.println("YAY - An A03 message");
+    public void doA03(MsgParse mp)
+        throws SQLException {
+        if (!mp.visit.getPatient_class().isEmpty())
+        try {
+            // use the mrn in the A03 to identify the patient (we want the pid)
+            // use patient.pid as visit.patient_pid
+            //    where visit.patient_pid = patient.pid
+            //    -- update the location fields to be null
+            //    -- update admission_type to be 'D'
+            //    -- set discharge date to field found in message
+            PreparedStatement prepStmt = connection.prepareStatement(
+                    "update visit "
+                            + "set location = ?, prior_location = ?, admission_type = ?" 
+                            + ", discharge_date = ? "
+                            + "where patient_pid = "
+                            + "(select pid from patient where mrn = ?)");
             
+            prepStmt.setString(1, mp.visit.getLocation());
+            prepStmt.setString(2, mp.visit.getPrior_location());
+            prepStmt.setString(3, mp.visit.getAdmission_type()); 
+            prepStmt.setString(4, mp.visit.getDischarge_date());
+            prepStmt.setString(5, mp.patient.getMRN());
+            prepStmt.executeUpdate();
+
+            prepStmt.close();
+        } catch (SQLException se) {
+            System.out.println("Error in DBLoader.doA03: " + se);
+        }     
     }//doA03
 //--------------------------------------------------------------------
     /**
