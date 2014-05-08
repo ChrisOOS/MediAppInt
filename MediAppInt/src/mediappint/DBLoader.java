@@ -371,7 +371,31 @@ public class DBLoader {
                 System.out.println("Error in DBLoader.set_LabOrder: " + se);
             }
         }
-
+    
+//--------------------------------------------------------------------
+    /**
+     * cancel_laborder<br>
+     * This method will call a preparedStatement which writes to the vLabOrder table
+     * @param MsgParse mp
+     * @throws SQLException
+     */
+    public void cancel_LabOrder(MsgParse mp)
+            throws SQLException {
+        try {
+                
+                PreparedStatement prepStmt = connection.prepareStatement(
+                        "delete from laborder where placerNum = ?");
+                
+                prepStmt.setString(1, mp.labOrder.getPlacerNum());
+                prepStmt.execute();
+                
+                prepStmt.close();
+            } catch (SQLException se) {
+                System.out.println("Error in DBLoader.set_LabOrder: " + se);
+            }
+        }
+    
+    
 //--------------------------------------------------------------------
 
 //--------------------------------------------------------------------
