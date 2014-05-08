@@ -142,9 +142,6 @@ public class Main {
                 else if (mp.event.getEventTypeCode().equals("A02")) {
                     
                     // CHRIS
-                    //get the current location from the visit table for patient                     
-                    //update table -- prior location gets value of current location
-                    //update table -- current location gets value from the A02 message
                     dbloader.doA02(mp);
                     
 
@@ -157,6 +154,12 @@ public class Main {
                 else if (mp.event.getEventTypeCode().equals("A08")) {
                     // CHRIS
                     dbloader.doA08(mp);
+                    
+                }
+                else if (mp.message.getMsgType().equals("ORM")) {
+                    if (mp.labOrder.getLabOrderControl().equals("NW")){
+                        dbloader.set_LabOrder(mp);
+                    }
                     
                 }
                 //set the message as processed
