@@ -106,7 +106,6 @@ CREATE  TABLE IF NOT EXISTS `mirthdb`.`Lab_Orders` (
   INDEX `fk_Lab_Orders_visit1_idx` (`visit_vid` ASC, `visit_patient_pid` ASC) ,
   INDEX `fk_Lab_Orders_Provider1_idx` (`Provider_providerID` ASC))
 ENGINE = InnoDB;
-AUTO_INCREMENT
 
 
 -- -----------------------------------------------------
@@ -124,7 +123,6 @@ CREATE  TABLE IF NOT EXISTS `mirthdb`.`Lab_Results` (
   PRIMARY KEY (`labResultsNum`, `Lab_Orders_labOrderNum`, `Lab_Orders_visit_vid`, `Lab_Orders_visit_patient_pid`) ,
   INDEX `fk_Lab_Results_Lab_Orders1_idx` (`Lab_Orders_labOrderNum` ASC, `Lab_Orders_visit_vid` ASC, `Lab_Orders_visit_patient_pid` ASC))
 ENGINE = InnoDB;
-AUTO_INCREMENT
 
 USE `mirthdb` ;
 
