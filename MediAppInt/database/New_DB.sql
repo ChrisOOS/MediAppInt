@@ -92,7 +92,7 @@ ENGINE = InnoDB;
 -- Table `mirthdb`.`Lab_Orders`
 -- -----------------------------------------------------
 CREATE  TABLE IF NOT EXISTS `mirthdb`.`Lab_Orders` (
-  `labOrderNum` INT(11) NOT NULL ,
+  `labOrderNum` INT(11) NOT NULL AUTO_INCREMENT,
   `pid` INT(11) NOT NULL ,
   `placerNum` VARCHAR(45) NULL ,
   `visit_vid` INT(11) NOT NULL ,
@@ -106,6 +106,7 @@ CREATE  TABLE IF NOT EXISTS `mirthdb`.`Lab_Orders` (
   INDEX `fk_Lab_Orders_visit1_idx` (`visit_vid` ASC, `visit_patient_pid` ASC) ,
   INDEX `fk_Lab_Orders_Provider1_idx` (`Provider_providerID` ASC))
 ENGINE = InnoDB;
+AUTO_INCREMENT = 1
 
 
 -- -----------------------------------------------------
