@@ -279,7 +279,64 @@ public class DBLoader {
         } catch (SQLException se) {
             System.out.println("Error in DBLoader.doA03: " + se);
         }     
-    }//doA03
+    }//doA03 - discharge
+//--------------------------------------------------------------------
+/**
+ * doA08<br>
+ * This method will call a preparedStatement which fetches and then updates
+ * from patient table
+ * AKA - Process an A08, update patient information
+ * @param MsgParse mp
+ * @throws SQLException
+ */      
+    public void doA08(MsgParse mp)
+        throws SQLException {
+        if (!mp.visit.getPatient_class().isEmpty())
+        try {
+            PreparedStatement prepStmt = connection.prepareStatement(
+                    "update patient set "
+                            + "last_name = ?"
+                            + ", first_name = ?"
+                            + ", birth_date = ?"
+                            + ", sex_code = ?"
+                            + ", ethnic_code = ?"
+                            + ", address_line1 = ?"
+                            + ", address_line2 = ?"
+                            + ", address_city = ?"
+                            + ", address_state = ?"
+                            + ", address_zip = ?"
+                            + ", home_phone = ?"
+                            + ", work_phone = ?"
+                            + ", marital_code = ?"
+                            + ", religion_code = ?"
+                            + ", ssn = ? "
+                            + "where mrn = ? ");
+
+            prepStmt.setString(1, mp.patient.getLastName());
+            prepStmt.setString(2, mp.patient.getFirstName());
+            prepStmt.setString(3, mp.patient.getBirthDate());
+            prepStmt.setString(4, mp.patient.getSexCd());
+            prepStmt.setString(5, mp.patient.getEthnicCd());
+            prepStmt.setString(6, mp.patient.getAddress1());
+            prepStmt.setString(7, mp.patient.getAddress2());
+            prepStmt.setString(8, mp.patient.getCity());
+            prepStmt.setString(9, mp.patient.getState());
+            prepStmt.setString(10, mp.patient.getZip());
+            prepStmt.setString(11, mp.patient.getHomePhone());
+            prepStmt.setString(12, mp.patient.getWorkPhone());
+            prepStmt.setString(13, mp.patient.getMaritalCd());
+            prepStmt.setString(14, mp.patient.getReligionCd());
+            prepStmt.setString(15, mp.patient.getSSN()); 
+            prepStmt.setString(16, mp.patient.getMRN());
+            prepStmt.executeUpdate();
+
+            prepStmt.close();
+        } catch (SQLException se) {
+            System.out.println("Error in DBLoader.doA08: " + se);
+        }     
+    }//doA08 - update patient information
+    
+    
 //--------------------------------------------------------------------
     /**
      * set_LabOrder<br>

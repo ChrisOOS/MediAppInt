@@ -154,7 +154,11 @@ public class Main {
                     dbloader.doA03(mp);
                     
                 }
-
+                else if (mp.event.getEventTypeCode().equals("A08")) {
+                    // CHRIS
+                    dbloader.doA08(mp);
+                    
+                }
                 //set the message as processed
                 dbloader.set_processed(iqseq);
                 //get sequence number of next unprocessed message
