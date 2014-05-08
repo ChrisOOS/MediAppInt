@@ -212,17 +212,18 @@ public class DBLoader {
 //--------------------------------------------------------------------
 //--------------------------------------------------------------------
 /**
- * update_Visit<br>
+ * doA02<br>
  * This method will call a preparedStatement which fetches and then updates
  * from visit table
+ * AKA - Process an A02, update a patient location
  * @param MsgParse mp
  * @throws SQLException
  */
-       public void update_Visit(MsgParse mp)
+       public void doA02(MsgParse mp)
             throws SQLException {
         if (!mp.visit.getPatient_class().isEmpty())
         try {
-//            System.out.println("we want to do an update here, but we're waiting on email answer");
+
             PreparedStatement prepStmt = connection.prepareStatement(
                     "update visit "
                             + "set prior_location = ?, location = ? "
@@ -237,10 +238,23 @@ public class DBLoader {
 
             prepStmt.close();
         } catch (SQLException se) {
-            System.out.println("Error in DBLoader.set_Visit: " + se);
+            System.out.println("Error in DBLoader.doA02: " + se);
         }
-    }
-    
+    }//doA02
+
+ //--------------------------------------------------------------------
+/**
+ * doA03<br>
+ * This method will call a preparedStatement which fetches and then updates
+ * from visit table
+ * AKA - Process an A03, discharge a patient
+ * @param MsgParse mp
+ * @throws SQLException
+ */      
+    public void doA03(MsgParse mp){
+        System.out.println("YAY - An A03 message");
+            
+    }//doA03
 //--------------------------------------------------------------------
     /**
      * set_LabOrder<br>

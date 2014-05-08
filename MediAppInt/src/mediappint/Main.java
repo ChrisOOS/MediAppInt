@@ -145,13 +145,7 @@ public class Main {
                     //get the current location from the visit table for patient                     
                     //update table -- prior location gets value of current location
                     //update table -- current location gets value from the A02 message
-                    //
-                    
-                    // TODO
-                    // IGoing to parse the location similar to how we parsed the attending provide
-                    // pull out the sub-components and piece them together
-                    // then we can compare the values...
-                    dbloader.update_Visit(mp);
+                    dbloader.doA02(mp);
                     
 
                 }
@@ -164,6 +158,7 @@ public class Main {
                     //    -- update the location fields to be null
                     //    -- update admission_type to be 'D'
                     //    -- set discharge date to now()
+                    dbloader.doA03(mp);
                     
                 }
 
