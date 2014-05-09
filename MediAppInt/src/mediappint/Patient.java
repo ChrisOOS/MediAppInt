@@ -32,6 +32,10 @@ public class Patient {
    private String WorkPhone = "";
    private String MaritalCd = "";
    private String ReligionCd = "";
+   //This is actually the VISIT NUMBER that will populate the visit ID table too
+   //got this req from Marco after class on Thurs 5/8
+   private String AcctNum = "";
+   
    private String ssn = "";
    private String MotherID = "";
    private String FatherID = "";
@@ -207,6 +211,15 @@ public class Patient {
 	public String getReligionCd(){
 		return ReligionCd;
 	}
+
+    public String getAcctNum() {
+        return AcctNum;
+    }
+
+    public void setAcctNum(String AcctNum) {
+        this.AcctNum = AcctNum;
+    }
+      
 
 //  Sex Code
 	public void setSexCd(String SexCd){

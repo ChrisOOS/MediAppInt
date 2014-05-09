@@ -128,23 +128,21 @@ public class MsgParse {
     String BirthDt = "";  		// PID 7
     String SexCd = "";    		// PID 8
     String Race = "";			// PID 10
-//    String Address = "";		// PID 11
-    String addrLine1 = "";    	// PID 11.1
+    String addrLine1 = "";              // PID 11.1
     String addrLine2 = "";		// PID 11.2
     String city = "";			// PID 11.3
     String stateCd = "";		// PID 11.4
-    String zipCd = "";		// PID 11.5
+    String zipCd = "";                  // PID 11.5
 //    String CountyCd = "";     	// PID 12
     String HomePhone = "";    	// PID 13
     String WorkPhone = "";    	// PID 14
     String MaritalCd = "";    	// PID 16
     String ReligionCd = "";   	// PID 17
 
-// TODO: This is a "VISIT NUMBER" and should come from BEDBOARD
-// WE NEED TO CHANGE THE WAY WE ARE STORING VISIT ID
-// We can use our VID as our visit primary key, but we need to populate visit_id with this
+// This is a "VISIT NUMBER" and comes from BEDBOARD
+// We can use our VID as our visit primary key, but we need to populate visit.visit_id with this
 // This is also going to have to be sent in our SN request
-//    String AcctNum = "";              // PID 18
+    String AcctNum = "";              // PID 18
     
     String ssn = "";          	// PID 19
 //    String MotherID = "";     	// PID 21
@@ -201,6 +199,13 @@ public class MsgParse {
         ReligionCd = myStructure.helper().get("PID-17").getData();
         patient.setReligionCd(ReligionCd);
         
+        //AcctNum - 18
+        // This is a "VISIT NUMBER" and comes from BEDBOARD
+        // We can use our VID as our visit primary key, but we need to populate visit.visit_id with this
+        // This is also going to have to be sent in our SN request
+        AcctNum = myStructure.helper().get("PID-18").getData();
+        patient.setAcctNum(AcctNum);
+        
         //ssn - 19
         ssn = myStructure.helper().get("PID-19").getData();
         patient.setSSN(ssn);
@@ -239,6 +244,7 @@ public class MsgParse {
    String attendingProviderNumber;
    String attendingProviderName;
    String hospitalService;
+   //We're not using this visit number (not in specs) see PID-18 for notes
    String visitNumber; //PV1-19
    String admitDate;
    String dischargeDate;
