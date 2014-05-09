@@ -139,7 +139,13 @@ public class MsgParse {
     String WorkPhone = "";    	// PID 14
     String MaritalCd = "";    	// PID 16
     String ReligionCd = "";   	// PID 17
+
+// TODO: This is a "VISIT NUMBER" and should come from BEDBOARD
+// WE NEED TO CHANGE THE WAY WE ARE STORING VISIT ID
+// We can use our VID as our visit primary key, but we need to populate visit_id with this
+// This is also going to have to be sent in our SN request
 //    String AcctNum = "";              // PID 18
+    
     String ssn = "";          	// PID 19
 //    String MotherID = "";     	// PID 21
 
@@ -233,7 +239,7 @@ public class MsgParse {
    String attendingProviderNumber;
    String attendingProviderName;
    String hospitalService;
-   String visitNumber;
+   String visitNumber; //PV1-19
    String admitDate;
    String dischargeDate;
    
