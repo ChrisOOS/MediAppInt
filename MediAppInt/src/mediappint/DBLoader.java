@@ -182,8 +182,8 @@ public class DBLoader {
                     "insert into visit (patient_class, admission_type, location, prior_location, "
                             + "attending_provider_number, attending_provider_name, hospital_service, visit_number, admit_date,"                           
                             + "discharge_date, patient_pid) "
-//   + "attending_provider_number, attending_provider_name, hospital_service, admit_date,"                           
-// + "values (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, " + patientId + ")");
+                            //   + "attending_provider_number, attending_provider_name, hospital_service, admit_date,"                           
+                            // + "values (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, " + patientId + ")");
                             // This pid comes from SET_PATIENT where we select MAX(PID)  
                             + "values (?, ?, ?, ?, ?, ?, ?, ?, ?, ?," + patientId + ")");
 
@@ -349,27 +349,45 @@ public class DBLoader {
      */
     public void set_LabOrder(MsgParse mp)
             throws SQLException {
+        String labOrderProvider = "";
         try {
-                
-                PreparedStatement prepStmt = connection.prepareStatement(
-                        "insert into Lab_orders (placerNum, labOrderControl, fillerOrderNum, dateTransaction, "
-                                + "serviceIdentifier, visit_patient_pid) "
-                                + "values (?, ?, ?, ?, ?, " 
-                                + "(select pid from patient where mrn = ?))");
-                
-                // TODO - In order to put the visit_vid (current error) in the table, 
-                // We're going to have to get "all the pids" first
-                
-                prepStmt.setString(1, mp.labOrder.getPlacerNum());
-                prepStmt.setString(2, mp.labOrder.getLabOrderControl());
-                prepStmt.setString(3, "fakefiller");
-                prepStmt.setString(4, mp.labOrder.getDateTransaction());
-                prepStmt.setString(5, mp.labOrder.getServiceIdentifier()); 
-                prepStmt.setString(6, mp.patient.getMRN());
-                
-                prepStmt.execute();
-                
-                prepStmt.close();
+            // We need to get the provider ID from the initial Visit which was sent by bedboard
+            PreparedStatement prepStmt = connection.prepareStatement(
+                    "select attending_provider_number from visit "
+                            + "where visit_number = ? ");
+
+            prepStmt.setString(1, mp.patient.getAcctNum());
+            ResultSet rs = prepStmt.executeQuery();
+            while (rs.next()){
+                labOrderProvider = rs.getString(1);
+                System.out.println("labOrderProvider: " + labOrderProvider);
+            }
+            prepStmt.execute();
+
+            //We're inserting into the labOrders table, breaking a little bit of referential inegrity
+            // because I'm inserting the provider ID directly into the table after getting it from visit above
+            //psst... we're not using the provider table
+            prepStmt = connection.prepareStatement(
+                    "insert into Lab_orders (placerNum, visit_vid, labOrderControl, fillerOrderNum, dateTransaction, "
+                            + "serviceIdentifier, visit_patient_pid, provider_providerID) "
+                            + "values (?, ?, ?, ?, ?, ?," 
+                            + "(select pid from patient where mrn = ?), ?)");
+
+            prepStmt.setString(1, mp.labOrder.getPlacerNum());
+            //Getting the "VISIT NUMBER" from PID-18 in Patient
+            prepStmt.setString(2, mp.patient.getAcctNum());
+            prepStmt.setString(3, mp.labOrder.getLabOrderControl());
+            //TODO : Need to write a method to generate a fillerNumber
+            prepStmt.setString(4, "fakefiller");
+            prepStmt.setString(5, mp.labOrder.getDateTransaction());
+            prepStmt.setString(6, mp.labOrder.getServiceIdentifier()); 
+            
+            prepStmt.setString(7, mp.patient.getMRN());
+            prepStmt.setString(8, labOrderProvider);
+
+            prepStmt.execute();
+
+            prepStmt.close();
             } catch (SQLException se) {
                 System.out.println("Error in DBLoader.set_LabOrder: " + se);
             }
@@ -377,7 +395,7 @@ public class DBLoader {
     
 //--------------------------------------------------------------------
     /**
-     * cancel_laborder<br>
+     * cancel_LabOrder<br>
      * This method will call a preparedStatement which writes to the vLabOrder table
      * @param MsgParse mp
      * @throws SQLException

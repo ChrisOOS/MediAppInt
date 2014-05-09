@@ -7,15 +7,9 @@ truncate table hl7_q;
 -- use this to see if our patients are properly poulated
 select * from patient
 inner join visit 
-where patient.pid = visit.patient_pid;
-
-
-update visit
-	set location = null, prior_location = null, admission_type = 'D', discharge_date = '3'
-where patient_pid = (select pid from patient where mrn = '000003123331');
-
-
-update visit set prior_location = 'MED1^101^1^^^^^', location = 'MED1^101^2^^^' where location = 'MED1^101^1^^^^^';
+join lab_orders
+where patient.pid = visit.patient_pid
+and lab_orders.visit_vid = visit.visit_number;
 
 
 
