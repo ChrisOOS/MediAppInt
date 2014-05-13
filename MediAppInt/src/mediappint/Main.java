@@ -163,11 +163,14 @@ public class Main {
                     if (mp.labOrder.getLabOrderControl().equals("CA")){
                         dbloader.cancel_LabOrder(mp);
                     }
+                    if (mp.labOrder.getLabOrderControl().equals("SN")){
+                        dbloader.set_LabOrder(mp);
+                    }
                     
                 }// if lab order
-                
-                
-                
+                               
+                ArrayList arr = dbloader.get_PatientMRN(mp);
+                LabGUI labGUI = new LabGUI(arr);
                 //set the message as processed
                 dbloader.set_processed(iqseq);
                 //get sequence number of next unprocessed message

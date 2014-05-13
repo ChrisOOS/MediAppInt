@@ -15,6 +15,7 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.util.*;
 
 public class DBLoader {
 
@@ -418,7 +419,55 @@ public class DBLoader {
     
     
 //--------------------------------------------------------------------
+//grab lab results
+    public void send_LabResults(MsgParse mp)
+            throws SQLException {
+        try {
 
+            prepStmt = connection.prepareStatement(
+                    "SELECT * FROM Lab_Results WHERE Visit_Num = ?");
+
+            //Getting the "VISIT NUMBER" from PID-18 in Patient
+            prepStmt.setString(1, mp.patient.getAcctNum());
+            prepStmt.execute();
+
+            prepStmt.close();
+            } catch (SQLException se) {
+                System.out.println("Error in DBLoader.set_LabOrder: " + se);
+            }
+        }
+
+//--------------------------------------------------------------------
+    //Grab mrns from patient table for GUI
+    public ArrayList get_PatientMRN(MsgParse mp)
+            throws SQLException {
+        ArrayList<String> arr = new ArrayList<String>();
+        try {
+           ResultSet rs = stmt.executeQuery("SELECT last_name, first_name, mrn FROM Patient");
+           
+           while(rs.next()) {
+               String val = rs.getString("last_name");
+               val += "      ";
+               val += rs.getString("first_name");
+               val += "      ";
+               val += rs.getString("mrn");
+               arr.add(val);
+           }
+        }catch (SQLException se) {
+                System.out.println("Error in DBLoader.set_LabOrder: " + se);
+            }
+        return arr;
+    }
+    
+    public void send_Request(MsgParse mp, String mrn)
+            throws SQLException {
+        try {
+            ResultSet rs = stmt.executeQuery("SELECT * FROM patient WHERE mrn = mrn");
+            
+        } catch (SQLException se) {
+            System.out.println("Error in DBLoader.set_LabOrder: " + se);
+        }
+    }
 //--------------------------------------------------------------------
     /**
      * close_dbloader
