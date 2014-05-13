@@ -443,7 +443,8 @@ public class DBLoader {
             throws SQLException {
         ArrayList<String> arr = new ArrayList<String>();
         try {
-           ResultSet rs = stmt.executeQuery("SELECT last_name, first_name, mrn FROM Patient");
+           ResultSet rs = stmt.executeQuery("SELECT last_name, first_name, mrn, admission_type FROM Patient JOIN VISIT "
+                   + "ON patient.pid = visit.patient_pid WHERE admission_type <> 'D' ");
            
            while(rs.next()) {
                String val = rs.getString("last_name");
@@ -459,7 +460,7 @@ public class DBLoader {
         return arr;
     }
     
-    public void send_Request(MsgParse mp, String mrn)
+    public void send_Request(String mrn)
             throws SQLException {
         try {
             ResultSet rs = stmt.executeQuery("SELECT * FROM patient WHERE mrn = mrn");

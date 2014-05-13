@@ -13,6 +13,7 @@ package mediappint;
 import java.awt.*;
 import javax.swing.*;
 import java.awt.event.*;
+import java.sql.SQLException;
 import java.util.*;
 
 public class LabGUI extends JFrame implements ActionListener
@@ -29,15 +30,19 @@ public class LabGUI extends JFrame implements ActionListener
     JTextArea jData;
     JLabel jlMRN;
     String field;
-	
-    public LabGUI(ArrayList arr)
-    {
+    String mrn;
+    DBLoader dbloader;
+    
+    public LabGUI(ArrayList arr) throws Exception {
+    
         //set the name, size, location, and layout
         super("Lab Information System");
         setSize(500,400);
         setLocation(100,100);
         setLayout(new BorderLayout());
 
+        dbloader = new DBLoader();
+        
         //define the menu bar and menu items of the menu bar
         menuBar = new JMenuBar();
         setJMenuBar(menuBar);
@@ -92,8 +97,7 @@ public class LabGUI extends JFrame implements ActionListener
 
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
                 setVisible(true);
-    }
-   
+    }   
 
     public void actionPerformed(ActionEvent e)
     {
@@ -109,11 +113,15 @@ public class LabGUI extends JFrame implements ActionListener
             "Lab Information System Group\n" +
             "Kov, Chris O, Nicolette"
             );
-            System.exit(0);
         }
         else if(e.getActionCommand().equals("Place Lab Order"))
         {
-            String mrn = jtMRN.getText();
+            mrn = jtMRN.getText();
+            try{
+                dbloader.send_Request(mrn);
+            }
+            catch(SQLException ex) {}
+            System.out.println("IN BUTTON: " + mrn);
         }
 
     }
