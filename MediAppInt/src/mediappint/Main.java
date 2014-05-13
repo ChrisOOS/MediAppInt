@@ -166,6 +166,9 @@ public class Main {
                     if (mp.labOrder.getLabOrderControl().equals("SN")){
                         dbloader.set_LabOrder(mp);
                     }
+                    if (mp.labOrder.getLabOrderControl().equals("NA")){
+                        dbloader.set_LabOrder(mp);
+                    }
                     
                 }// if lab order
                                

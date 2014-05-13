@@ -406,14 +406,14 @@ public class DBLoader {
         try {
                 
                 PreparedStatement prepStmt = connection.prepareStatement(
-                        "delete from laborder where placerNum = ?");
+                        "update lab_orders set labOrderControl = 'C' where placerNum = ?");
                 
                 prepStmt.setString(1, mp.labOrder.getPlacerNum());
                 prepStmt.execute();
                 
                 prepStmt.close();
             } catch (SQLException se) {
-                System.out.println("Error in DBLoader.set_LabOrder: " + se);
+                System.out.println("Error in DBLoader.cancel_LabOrder: " + se);
             }
         }
     
